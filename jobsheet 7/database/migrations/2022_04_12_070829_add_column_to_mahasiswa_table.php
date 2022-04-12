@@ -28,9 +28,7 @@ class AddColumnToMahasiswaTable extends Migration
     public function down()
     {
         Schema::table('mahasiswa', function (Blueprint $table) {
-            $table->dropColumn('email');
-            $table->dropColumn('alamat');
-            $table->dropColumn('tanggal_lahir');
+            $table->dropColumn('email', 'alamat', 'tanggal_lahir');
         });
     }
 }

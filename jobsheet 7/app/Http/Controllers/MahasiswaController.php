@@ -15,14 +15,22 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
-        //fungsi eloquent menampilkan data menggunakan pagination
-        $mahasiswa = Mahasiswa::all(); // Mengambil semua isi tabel
-        $mahasiswa = DB::table('mahasiswa')->get(); // Mengambil semua isi tabel
-        $posts = Mahasiswa::orderBy('Nim', 'desc')->paginate(6);
-        return view('mahasiswa.index', compact('mahasiswa'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
-        // $paginate = Mahasiswa::orderBy('id_mahasiswa', 'asc')->paginate(3);
-        // return view('mahasiswa.index', ['mahasiswa' => $mahasiswa, 'paginate' => $paginate]);
+        if (request('search')) {
+            $paginate = Mahasiswa::where(
+                'nim', 'like', '%' . request('search') . '%'
+            )
+                ->orwhere('nama', 'like', '%' . request('search') . '%')
+                ->orwhere('kelas', 'like', '%' . request('search') . '%')
+                ->orwhere('jurusan', 'like', '%' . request('search') . '%')
+                ->orwhere('email', 'like', '%' . request('search') . '%')
+                ->orwhere('alamat', 'like', '%' . request('search') . '%')
+                ->orwhere('tanggal_lahir', 'like', '%' . request('search') . '%')->paginate(3);
+            return view('mahasiswa.index', ['paginate' => $paginate]);
+        } else {
+            $mahasiswa = Mahasiswa::all(); // Mengambil semua isi tabel
+            $paginate = Mahasiswa::orderBy('id_mahasiswa', 'asc')->paginate(3);
+            return view('mahasiswa.index', ['mahasiswa' => $mahasiswa, 'paginate' => $paginate]);
+        }
     }
 
     /**
@@ -132,6 +140,7 @@ class MahasiswaController extends Controller
     public function destroy($nim)
     {
         //fungsi eloquent untuk menghapus data
+
         Mahasiswa::where('nim', $nim)->delete();
         return redirect()->route('mahasiswa.index')
             ->with('success', 'Mahasiswa Berhasil Dihapus');

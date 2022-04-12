@@ -5,6 +5,14 @@
         <div class="pull-left mt-2">
             <h2>JURUSAN TEKNOLOGI INFORMASI-POLITEKNIK NEGERI MALANG</h2>
         </div>
+        <div class="float-left my-2">
+            <form action="{{ route('mahasiswa.index') }}">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="search now" name="search" value="{{ request('search')}}">
+                    <button class="btn btn-warning" type="submit">Search</button>&emsp;
+                </div>
+            </form>
+        </div>
         <div class="float-right my-2">
             <a class="btn btn-success" href="{{ route('mahasiswa.create') }}"> Input Mahasiswa</a>
         </div>
@@ -28,7 +36,7 @@
         <th>Tanggal Lahir</th>
         <th width="280px">Action</th>
     </tr>
-    @foreach ($mahasiswa as $mhs)
+    @foreach ($paginate as $mhs)
     <tr>
 
         <td>{{ $mhs ->nim }}</td>
@@ -39,16 +47,19 @@
         <td>{{ $mhs ->alamat }}</td>
         <td>{{ $mhs ->tanggal_lahir }}</td>
         <td>
-            <form action="{{ route('mahasiswa.destroy',['mahasiswa'=>$mhs->nim]) }}" method="POST">
+            <form action="{{ route('mahasiswa.destroy',$mhs->nim) }}" method="POST">
 
                 <a class="btn btn-info" href="{{ route('mahasiswa.show',$mhs->nim) }}">Show</a>
                 <a class="btn btn-primary" href="{{ route('mahasiswa.edit',$mhs->nim) }}">Edit</a>
                 @csrf
                 @method('DELETE')
-                <a class="btn btn-danger" href="{{ route('mahasiswa.destroy',$mhs->nim) }}" onclick="return confirm('yakin?');">Delete</a>
+                <button type="submit" class="btn btn-danger" onclick="return confirm('yakin?');">Delete</button>
             </form>
         </td>
     </tr>
     @endforeach
 </table>
+<div class="d-flex justify-content-end">
+    {{ $paginate->links() }}
+</div>
 @endsection
