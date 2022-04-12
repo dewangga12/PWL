@@ -28,7 +28,7 @@ class MahasiswaController extends Controller
             return view('mahasiswa.index', ['paginate' => $paginate]);
         } else {
             $mahasiswa = Mahasiswa::all(); // Mengambil semua isi tabel
-            $paginate = Mahasiswa::orderBy('id_mahasiswa', 'asc')->paginate(3);
+            $paginate = Mahasiswa::orderBy('nim', 'asc')->paginate(3);
             return view('mahasiswa.index', ['mahasiswa' => $mahasiswa, 'paginate' => $paginate]);
         }
     }
