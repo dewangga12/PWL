@@ -49,6 +49,9 @@ class MahasiswaController extends Controller
             'Nama' => 'required',
             'Kelas' => 'required',
             'Jurusan' => 'required',
+            'Email' => 'required',
+            'Alamat' => 'required',
+            'Tanggal_Lahir' => 'required'
         ]);
 
         //fungsi eloquent untuk menambah data
@@ -98,7 +101,10 @@ class MahasiswaController extends Controller
             'Nim' => 'required',
             'Nama' => 'required',
             'Kelas' => 'required',
-            'Jurusan' => 'required'
+            'Jurusan' => 'required',
+            'Email' => 'required',
+            'Alamat' => 'required',
+            'Tanggal_Lahir' => 'required'
         ]);
 
         //fungsi eloquent untuk mengupdate data inputan kita
@@ -107,6 +113,9 @@ class MahasiswaController extends Controller
             'nama' => $request->Nama,
             'kelas' => $request->Kelas,
             'jurusan' => $request->Jurusan,
+            'email' => $request->Email,
+            'alamat' => $request->Alamat,
+            'tanggal_lahir' => $request->Tanggal_Lahir
         ]);
 
         //jika data berhasil diupdate, akan kembali ke halaman utama
@@ -123,7 +132,7 @@ class MahasiswaController extends Controller
     public function destroy($nim)
     {
         //fungsi eloquent untuk menghapus data
-        Mahasiswa::find($nim)->delete();
+        Mahasiswa::where('nim', $nim)->delete();
         return redirect()->route('mahasiswa.index')
             ->with('success', 'Mahasiswa Berhasil Dihapus');
     }
