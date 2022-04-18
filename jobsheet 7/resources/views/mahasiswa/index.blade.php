@@ -29,7 +29,7 @@
     <tr>
         <th>Nim</th>
         <th>Nama</th>
-        <th>Kelas</th>
+        <th width="75px">Kelas</th>
         <th>Jurusan</th>
         <th>Email</th>
         <th>Alamat</th>
@@ -41,7 +41,7 @@
 
         <td>{{ $mhs ->nim }}</td>
         <td>{{ $mhs ->nama }}</td>
-        <td>{{ $mhs ->kelas }}</td>
+        <td>{{ $mhs ->kelas->nama_kelas }}</td>
         <td>{{ $mhs ->jurusan }}</td>
         <td>{{ $mhs ->email }}</td>
         <td>{{ $mhs ->alamat }}</td>
