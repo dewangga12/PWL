@@ -9,7 +9,7 @@
             <form action="{{ route('mahasiswa.index') }}">
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" placeholder="search now" name="search" value="{{ request('search')}}">
-                    <button class="btn btn-warning" type="submit">Search</button>&emsp;
+                    <button class="p-1 btn border border-primary text-primary" type="submit" >Search</button>&emsp;
                 </div>
             </form>
         </div>
@@ -34,10 +34,10 @@
         <th>Email</th>
         <th>Alamat</th>
         <th>Tanggal Lahir</th>
-        <th width="280px">Action</th>
+        <th width="300px">Action</th>
     </tr>
     @foreach ($paginate as $mhs)
-    <tr>
+    <tr >
 
         <td>{{ $mhs ->nim }}</td>
         <td>{{ $mhs ->nama }}</td>
@@ -54,7 +54,9 @@
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="btn btn-danger" onclick="return confirm('yakin?');">Delete</button>
+                <a class="btn btn-warning" href="{{ route('mahasiswa.khs',$mhs->id_mahasiswa) }}">Nilai</a>
             </form>
+            
         </td>
     </tr>
     @endforeach

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Mahasiswa;
 use App\Models\Kelas;
+use App\Models\Matakuliah;
+use App\Models\Mahasiswa_Matakuliah;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -21,7 +23,7 @@ class MahasiswaController extends Controller
                 'nim', 'like', '%' . request('search') . '%'
             )
                 ->orwhere('nama', 'like', '%' . request('search') . '%')
-                ->orwhere('kelas', 'like', '%' . request('search') . '%')
+                // ->orwhere('kelas_id', 'like', '%' . request('search') . '%')
                 ->orwhere('jurusan', 'like', '%' . request('search') . '%')
                 ->orwhere('email', 'like', '%' . request('search') . '%')
                 ->orwhere('alamat', 'like', '%' . request('search') . '%')
@@ -165,8 +167,17 @@ class MahasiswaController extends Controller
     {
         //fungsi eloquent untuk menghapus data
 
-        Mahasiswa::where('nim', $nim)->delete();
+        Mahasiswa::find($nim)->delete();
         return redirect()->route('mahasiswa.index')
             ->with('success', 'Mahasiswa Berhasil Dihapus');
+    }
+    public function khs($id)
+    {
+        $khs = Mahasiswa_Matakuliah::where('mahasiswa_id', $id)
+            ->with('matakuliah')->get();
+        $khs->mahasiswa = Mahasiswa::with('kelas')
+            ->where('id_mahasiswa', $id)->first();
+
+        return view('mahasiswa.khs', compact('khs'));
     }
 }

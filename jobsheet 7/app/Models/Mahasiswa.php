@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\Mahasiswa as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Mahasiswa_MataKuliah;
 
 
 
@@ -33,5 +34,10 @@ class Mahasiswa extends Model
     public function kelas()
     {
         return $this->belongsTo(Kelas::class);
+    }
+    public function mahasiswa_matakuliah()
+    {
+        return $this->hasMany(Mahasiswa_Matakuliah::class);
+        //return $this->belongsToMany(MataKuliah::class, 'mahasiswa_matakuliah');
     }
 }
