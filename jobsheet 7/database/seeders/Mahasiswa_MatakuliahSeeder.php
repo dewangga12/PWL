@@ -16,6 +16,26 @@ class Mahasiswa_MatakuliahSeeder extends Seeder
     {
         $data = [
             [
+                'mahasiswa_id' => 1,
+                'matakuliah_id' => 1,
+                'nilai' => 84
+            ],
+            [
+                'mahasiswa_id' => 1,
+                'matakuliah_id' => 2,
+                'nilai' => 90
+            ],
+            [
+                'mahasiswa_id' => 1,
+                'matakuliah_id' => 3,
+                'nilai' => 78
+            ],
+            [
+                'mahasiswa_id' => 1,
+                'matakuliah_id' => 4,
+                'nilai' => 81
+            ],
+            [
                 'mahasiswa_id' => 2,
                 'matakuliah_id' => 1,
                 'nilai' => 83
