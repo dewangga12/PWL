@@ -8,6 +8,11 @@
     <div class="col-12 text-center">
         <h3><strong>KARTU HASIL STUDI (KHS)</strong></h3><br><br>
     </div>
+    <div class="row justify-content-end" >
+        <div>
+            <a class="btn btn-success" href="{{ route('cetak_pdf', $khs->mahasiswa->id_mahasiswa) }}">Cetak PDF</a>
+        </div>
+    </div><br/>
     <div class="col-lg-12 margin-tb">
         <b>Nama:</b> {{ $khs->mahasiswa->nama }}<br>
         <b>NIM: </b>{{ $khs->mahasiswa->nim }}<br>

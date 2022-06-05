@@ -22,3 +22,4 @@ Route::get('/', function () {
 Route::resource('mahasiswa', MahasiswaController::class);
 
 Route::get('mahasiswa/nilai/{id}', [MahasiswaController::class, 'khs'])->name('mahasiswa.khs');
+Route::get('mahasiswa/cetak_pdf/{id}', [MahasiswaController::class,'cetak_pdf'])->name('cetak_pdf');
